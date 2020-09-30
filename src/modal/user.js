@@ -14,4 +14,18 @@ const storeUser = async (params) => {
   }
 };
 
-module.exports = { storeUser };
+const getUser = async (emailId) => {
+  try {
+    const sql = "SELECT * FROM users where email=?";
+    const results = await query(sql, [emailId]);
+    return {
+      userId: results[0].userId,
+      email: results[0].email,
+      password: results[0].password,
+    };
+  } catch (ex) {
+    return ex;
+  }
+};
+
+module.exports = { storeUser, getUser };

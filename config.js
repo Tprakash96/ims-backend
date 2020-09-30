@@ -12,4 +12,7 @@ module.exports = {
   mysqlUserName: ENV.MYSQL_USER_NAME,
   mysqlPassword: ENV.MYSQL_PASSWORD,
   mysqlDatabaseName: ENV.MYSQL_DATABASENAME,
+  senderEmail: ENV.SENDER_EMAIL,
+  senderEmailPassword: ENV.SENDER_EMAIL_PASSWORD,
+  hostName: ENV.HOST_NAME,
 };
