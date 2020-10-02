@@ -32,11 +32,16 @@ const signup = async (req, res) => {
     const { email, password } = req.body;
     const encryptedPassword = bcrypt.hashSync(password, 10);
     const isValid = isEmail(email);
+    console.log({ isValid });
     if (isValid) {
-      const result = await storeUser({ email, password: encryptedPassword });
-      if (result === 1)
-        res.status(201).send({ status: 2000, message: "row inserted" });
-      else res.send("Something went wrong..");
+      const isExit = await getUser(email);
+      console.log({ isExit: isExit.length });
+      if (!Object.keys(isExit).length) {
+        const result = await storeUser({ email, password: encryptedPassword });
+        if (result === 1)
+          res.status(201).send({ status: 2000, message: "row inserted" });
+        else res.send("Something went wrong");
+      } else res.send("Email is already exist");
     } else {
       res.send("Email is not valid");
     }

@@ -18,11 +18,13 @@ const getUser = async (emailId) => {
   try {
     const sql = "SELECT * FROM users where email=?";
     const results = await query(sql, [emailId]);
-    return {
-      userId: results[0].userId,
-      email: results[0].email,
-      password: results[0].password,
-    };
+    const data = {};
+    if (results.length && results) {
+      data.userId = results[0].userId;
+      data.email = results && results[0].email;
+      data.password = results && results[0].password;
+    }
+    return data;
   } catch (ex) {
     return ex;
   }
